@@ -1,16 +1,16 @@
 package configs
 
-type Model struct {
-	Name  string `yaml:"name"`
-	Sites []Site `yaml:"sites"`
+type Dto struct {
+	Name  string    `yaml:"name"`
+	Sites []SiteDto `yaml:"sites"`
 }
 
-type Site struct {
-	Name  string `yaml:"name"`
-	Steps []Step `yaml:"steps"`
+type SiteDto struct {
+	Name  string    `yaml:"name"`
+	Steps []StepDto `yaml:"steps"`
 }
 
-type Step struct {
+type StepDto struct {
 	Selector string `yaml:"selector"`
 	IsValue  bool   `yaml:"isValue"`
 }

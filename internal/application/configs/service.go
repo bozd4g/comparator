@@ -20,20 +20,20 @@ func New() Service {
 	}
 }
 
-func (s service) GetAll() ([]Model, error) {
+func (s service) GetAll() ([]Dto, error) {
 	files, err := ioutil.ReadDir(s.configsPath)
 	if err != nil {
 		return nil, err
 	}
 
-	var models []Model
+	var models []Dto
 	for _, file := range files {
 		content, err := ioutil.ReadFile(path.Join(s.configsPath, file.Name()))
 		if err != nil {
 			return nil, err
 		}
 
-		var model Model
+		var model Dto
 		err = yaml.Unmarshal(content, &model)
 		if err != nil {
 			return nil, err
@@ -44,7 +44,7 @@ func (s service) GetAll() ([]Model, error) {
 	return models, nil
 }
 
-func (s service) GetByName(name string) (*Model, error) {
+func (s service) GetByName(name string) (*Dto, error) {
 	models, err := s.GetAll()
 	if err != nil {
 		return nil, err
