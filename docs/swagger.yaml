@@ -1,0 +1,51 @@
+basePath: /
+definitions:
+  comparators.ProductDto:
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: me@furkanbozdag.com
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a price comparator application.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Comparator API
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: This method redirects to swagger ui
+      produces:
+      - application/json
+      responses:
+        "308":
+          description: Redirect
+          schema:
+            type: string
+      summary: redirectToSwaggerUi
+      tags:
+      - IndexController
+  /api/products/{name}/list:
+    get:
+      consumes:
+      - application/json
+      description: This method returns all prices
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/comparators.ProductDto'
+            type: array
+      summary: Get all prices
+      tags:
+      - Products
+swagger: "2.0"
