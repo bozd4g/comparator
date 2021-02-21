@@ -36,6 +36,12 @@ paths:
       consumes:
       - application/json
       description: This method returns all prices
+      parameters:
+      - description: product
+        in: path
+        name: name
+        required: true
+        type: string
       produces:
       - application/json
       responses:

@@ -23,6 +23,6 @@ func main() {
 	application := app.New()
 	err := application.Build().Run()
 	if err != nil {
-		panic(fmt.Sprintf("app cannot be started! Error %+v", err))
+		panic(fmt.Sprintf("App cannot be started! Error %+v", err))
 	}
 }

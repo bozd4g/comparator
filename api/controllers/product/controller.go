@@ -3,6 +3,7 @@ package product
 import (
 	"github.com/bozd4g/comparator/internal/application/comparators"
 	"github.com/gin-gonic/gin"
+	"net/http"
 )
 
 func New(service comparators.Service) Controller {
@@ -12,7 +13,7 @@ func New(service comparators.Service) Controller {
 func (c controller) Init(e *gin.Engine) {
 	group := e.Group("api/products")
 	{
-		group.GET("", c.getAllHandler)
+		group.GET(":name/list", c.getAllHandler)
 	}
 }
 
@@ -21,8 +22,15 @@ func (c controller) Init(e *gin.Engine) {
 // @Accept json
 // @Produce json
 // @tags Products
+// @Param name path string true "product"
 // @Success 200 {object} []comparators.ProductDto "Success"
 // @Router /api/products/{name}/list [get]
 func (c controller) getAllHandler(g *gin.Context) {
-	g.JSON(200, gin.H{"success": true})
+	name := g.Param("name")
+	if name == "" {
+		g.JSON(http.StatusBadRequest, gin.H{"error": "Name cannot be empty!"})
+		return
+	}
+
+	g.JSON(200, gin.H{"success": name})
 }

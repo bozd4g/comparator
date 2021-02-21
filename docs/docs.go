@@ -69,6 +69,15 @@ var doc = `{
                     "Products"
                 ],
                 "summary": "Get all prices",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "product",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Success",
