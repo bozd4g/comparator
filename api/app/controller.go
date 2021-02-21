@@ -4,6 +4,7 @@ import (
 	"github.com/bozd4g/comparator/api/controllers/index"
 	"github.com/bozd4g/comparator/api/controllers/product"
 	"github.com/bozd4g/comparator/internal/application/comparators"
+	"github.com/bozd4g/comparator/internal/application/configs"
 	"net/http"
 
 	_ "github.com/bozd4g/comparator/docs"
@@ -23,7 +24,8 @@ func (a *application) InitIndexController() {
 }
 
 func (a *application) InitBookController() {
-	service := comparators.New()
+	configService := configs.New()
+	service := comparators.New(configService)
 	product.New(service).Init(a.engine)
 }
 
