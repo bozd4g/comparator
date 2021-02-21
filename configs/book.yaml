@@ -2,5 +2,5 @@ name: Books
 sites:
   - name: D&R
     steps:
-      - selector: '#'
+      - selector: "#"
         isValue: false

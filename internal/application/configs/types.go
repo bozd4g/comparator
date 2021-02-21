@@ -1,8 +1,10 @@
 package configs
 
 type Service interface {
-	GetAll() []Model
-	GetByName(name string) Model
+	GetAll() ([]Model, error)
+	GetByName(name string) (*Model, error)
 }
 
-type service struct{}
+type service struct {
+	configsPath string
+}
