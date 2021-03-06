@@ -23,7 +23,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Produce json
 // @tags Products
 // @Param name path string true "product"
-// @Success 200 {object} []comparators.ProductDto "Success"
+// @Success 200 {object} []object "Success"
 // @Router /api/products/{name}/list [get]
 func (c controller) getAllHandler(g *gin.Context) {
 	name := g.Param("name")
