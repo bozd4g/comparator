@@ -12,5 +12,12 @@ type SiteDto struct {
 
 type StepDto struct {
 	Selector string `yaml:"selector" json:"selector"`
-	IsValue  bool   `yaml:"isValue" json:"isValue"`
+	Action   Action `yaml:"action" json:"action"`
 }
+
+type Action string
+const (
+	SEARCH Action = "SEARCH"
+	CLICK  Action = "CLICK"
+	VALUE  Action = "VALUE"
+)

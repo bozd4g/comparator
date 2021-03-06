@@ -1,6 +1,9 @@
 name: Books
 sites:
   - name: D&R
+    site: https://www.dr.com.tr
     steps:
-      - selector: "#"
-        isValue: false
+      - selector: /search?q=%s
+        action: SEARCH
+      - selector: .list-cell:first-child .price
+        action: VALUE
