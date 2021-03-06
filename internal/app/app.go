@@ -18,7 +18,7 @@ func (a *application) Build() Application {
 func (a *application) Run() error {
 	port := os.Getenv("PORT")
 	if port == "" {
-		port = "8080"
+		port = "5000"
 	}
 
 	fmt.Println("Application starting..")

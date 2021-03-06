@@ -1,10 +1,10 @@
 package app
 
 import (
-	"github.com/bozd4g/comparator/api/controllers/index"
-	"github.com/bozd4g/comparator/api/controllers/product"
-	"github.com/bozd4g/comparator/internal/application/comparators"
-	"github.com/bozd4g/comparator/internal/application/configs"
+	"github.com/bozd4g/comparator/internal/controllers/index"
+	"github.com/bozd4g/comparator/internal/controllers/product"
+	"github.com/bozd4g/comparator/internal/services/comparators"
+	"github.com/bozd4g/comparator/internal/services/configs"
 	"net/http"
 
 	_ "github.com/bozd4g/comparator/docs"

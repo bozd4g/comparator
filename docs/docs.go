@@ -32,71 +32,7 @@ var doc = `{
     },
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
-    "paths": {
-        "/": {
-            "get": {
-                "description": "This method redirects to swagger ui",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "IndexController"
-                ],
-                "summary": "redirectToSwaggerUi",
-                "responses": {
-                    "308": {
-                        "description": "Redirect",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/products/{name}/list": {
-            "get": {
-                "description": "This method returns all prices",
-                "consumes": [
-                    "application/json"
-                ],
-                "produces": [
-                    "application/json"
-                ],
-                "tags": [
-                    "Products"
-                ],
-                "summary": "Get all prices",
-                "parameters": [
-                    {
-                        "type": "string",
-                        "description": "product",
-                        "name": "name",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Success",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/comparators.ProductDto"
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    },
-    "definitions": {
-        "comparators.ProductDto": {
-            "type": "object"
-        }
-    }
+    "paths": {}
 }`
 
 type swaggerInfo struct {

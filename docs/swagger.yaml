@@ -1,7 +1,4 @@
 basePath: /
-definitions:
-  comparators.ProductDto:
-    type: object
 host: localhost:8080
 info:
   contact:
@@ -15,43 +12,5 @@ info:
   termsOfService: http://swagger.io/terms/
   title: Comparator API
   version: "1.0"
-paths:
-  /:
-    get:
-      consumes:
-      - application/json
-      description: This method redirects to swagger ui
-      produces:
-      - application/json
-      responses:
-        "308":
-          description: Redirect
-          schema:
-            type: string
-      summary: redirectToSwaggerUi
-      tags:
-      - IndexController
-  /api/products/{name}/list:
-    get:
-      consumes:
-      - application/json
-      description: This method returns all prices
-      parameters:
-      - description: product
-        in: path
-        name: name
-        required: true
-        type: string
-      produces:
-      - application/json
-      responses:
-        "200":
-          description: Success
-          schema:
-            items:
-              $ref: '#/definitions/comparators.ProductDto'
-            type: array
-      summary: Get all prices
-      tags:
-      - Products
+paths: {}
 swagger: "2.0"

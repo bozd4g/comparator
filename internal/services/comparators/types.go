@@ -1,6 +1,6 @@
 package comparators
 
-import "github.com/bozd4g/comparator/internal/application/configs"
+import "github.com/bozd4g/comparator/internal/services/configs"
 
 type Service interface {
 	GetAll(name string)

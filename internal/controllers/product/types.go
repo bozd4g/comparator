@@ -1,7 +1,7 @@
 package product
 
 import (
-	"github.com/bozd4g/comparator/internal/application/comparators"
+	"github.com/bozd4g/comparator/internal/services/comparators"
 	"github.com/gin-gonic/gin"
 )
 

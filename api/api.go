@@ -2,7 +2,7 @@ package main
 
 import (
 	"fmt"
-	"github.com/bozd4g/comparator/api/app"
+	"github.com/bozd4g/comparator/internal/app"
 )
 
 // @title Comparator API
