@@ -16,7 +16,7 @@ func New() Service {
 	}
 
 	return service{
-		configsPath: path.Join(dirname, "configs"),
+		configsPath: path.Join(dirname, "config"),
 	}
 }
 

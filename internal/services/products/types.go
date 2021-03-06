@@ -1,4 +1,4 @@
-package comparators
+package products
 
 import "github.com/bozd4g/comparator/internal/services/configs"
 

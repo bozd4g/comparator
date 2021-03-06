@@ -1,9 +1,10 @@
 package app
 
 import (
+	"github.com/bozd4g/comparator/internal/controllers/config"
 	"github.com/bozd4g/comparator/internal/controllers/index"
 	"github.com/bozd4g/comparator/internal/controllers/product"
-	"github.com/bozd4g/comparator/internal/services/comparators"
+	"github.com/bozd4g/comparator/internal/services/products"
 	"github.com/bozd4g/comparator/internal/services/configs"
 	"net/http"
 
@@ -16,6 +17,7 @@ import (
 func (a *application) AddControllers() *application {
 	a.InitIndexController()
 	a.InitBookController()
+	a.InitConfigController()
 	return a
 }
 
@@ -25,8 +27,13 @@ func (a *application) InitIndexController() {
 
 func (a *application) InitBookController() {
 	configService := configs.New()
-	service := comparators.New(configService)
+	service := products.New(configService)
 	product.New(service).Init(a.engine)
+}
+
+func (a *application) InitConfigController() {
+	service := configs.New()
+	config.New(service).Init(a.engine)
 }
 
 func (a *application) InitMiddlewares() *application {

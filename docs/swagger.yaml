@@ -1,0 +1,120 @@
+basePath: /
+definitions:
+  configs.Dto:
+    properties:
+      name:
+        type: string
+      sites:
+        items:
+          $ref: '#/definitions/configs.SiteDto'
+        type: array
+    type: object
+  configs.SiteDto:
+    properties:
+      name:
+        type: string
+      steps:
+        items:
+          $ref: '#/definitions/configs.StepDto'
+        type: array
+    type: object
+  configs.StepDto:
+    properties:
+      isValue:
+        type: boolean
+      selector:
+        type: string
+    type: object
+  products.Dto:
+    type: object
+host: localhost:5000
+info:
+  contact:
+    email: me@furkanbozdag.com
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a price comparator application.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Comparator API
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: This method redirects to swagger ui
+      produces:
+      - application/json
+      responses:
+        "308":
+          description: Redirect
+          schema:
+            type: string
+      summary: redirectToSwaggerUi
+      tags:
+      - IndexController
+  /api/configs:
+    get:
+      consumes:
+      - application/json
+      description: This method returns all configs
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/configs.Dto'
+            type: array
+      summary: Get all configs
+      tags:
+      - Configs
+  /api/configs/{name}:
+    get:
+      consumes:
+      - application/json
+      description: This method returns spesific config
+      parameters:
+      - description: Config name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: '#/definitions/configs.Dto'
+      summary: Get configs by name
+      tags:
+      - Configs
+  /api/products/{name}:
+    get:
+      consumes:
+      - application/json
+      description: This method returns all prices
+      parameters:
+      - description: Product name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/products.Dto'
+            type: array
+      summary: Get all prices
+      tags:
+      - Products
+swagger: "2.0"

@@ -1,7 +1,7 @@
-package product
+package config
 
 import (
-	"github.com/bozd4g/comparator/internal/services/comparators"
+	"github.com/bozd4g/comparator/internal/services/configs"
 	"github.com/gin-gonic/gin"
 )
 
@@ -10,5 +10,5 @@ type Controller interface {
 }
 
 type controller struct {
-	service comparators.Service
+	service configs.Service
 }
