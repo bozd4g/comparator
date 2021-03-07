@@ -24,3 +24,15 @@ sites:
       - id: 2
         selector: ul.product-grid li:first-child .price .value
         action: VALUE
+  - name: Hepsiburada
+    address: https://www.hepsiburada.com
+    steps:
+      - id: 0
+        selector: /ara?q=%s
+        action: SEARCH
+      - id: 1
+        selector: ul.product-list li.search-item:nth-child(2) a[href]
+        action: LINK
+      - id: 2
+        selector: ul.product-list li.search-item:nth-child(2) .product-price
+        action: VALUE

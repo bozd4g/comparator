@@ -10,7 +10,7 @@ import (
 )
 
 func New(config configs.Service) Service {
-	return service{collector: colly.NewCollector(colly.AllowURLRevisit()), configService: config}
+	return service{collector: colly.NewCollector(colly.AllowURLRevisit(), colly.UserAgent(SAMPLE_USER_AGENT)), configService: config}
 }
 
 func (s service) GetAll(name string) ([]Dto, error) {
@@ -49,6 +49,10 @@ func (s service) collectDataFromSite(name string, config configs.Dto) []Dto {
 
 		sort.Slice(site.Steps, func(i, j int) bool {
 			return site.Steps[i].Id > site.Steps[j].Id
+		})
+
+		s.collector.OnError(func(response *colly.Response, err error) {
+			fmt.Println(err)
 		})
 
 		for _, step := range site.Steps {
