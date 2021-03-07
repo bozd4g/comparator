@@ -138,7 +138,7 @@ var doc = `{
                     {
                         "type": "string",
                         "description": "Category name",
-                        "name": "config",
+                        "name": "category",
                         "in": "query"
                     }
                 ],
@@ -174,6 +174,9 @@ var doc = `{
         "configs.SiteDto": {
             "type": "object",
             "properties": {
+                "address": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },

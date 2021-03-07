@@ -1,9 +1,14 @@
 name: Books
 sites:
   - name: D&R
-    site: https://www.dr.com.tr
+    address: https://www.dr.com.tr
     steps:
-      - selector: /search?q=%s
+      - id: 0
+        selector: /search?q=%s
         action: SEARCH
-      - selector: .list-cell:first-child .price
+      - id: 1
+        selector: .list-cell:first-child .item-name
+        action: LINK
+      - id: 2
+        selector: .list-cell:first-child .price
         action: VALUE

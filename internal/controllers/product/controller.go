@@ -24,7 +24,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Produce json
 // @tags Products
 // @Param name path string true "Product name"
-// @Param config query string false "Category name"
+// @Param category query string false "Category name"
 // @Success 200 {object} []products.Dto "Success"
 // @Router /api/products/{name} [get]
 func (c controller) getAllHandler(g *gin.Context) {

@@ -123,7 +123,7 @@
                     {
                         "type": "string",
                         "description": "Category name",
-                        "name": "config",
+                        "name": "category",
                         "in": "query"
                     }
                 ],
@@ -159,6 +159,9 @@
         "configs.SiteDto": {
             "type": "object",
             "properties": {
+                "address": {
+                    "type": "string"
+                },
                 "name": {
                     "type": "string"
                 },

@@ -11,6 +11,8 @@ definitions:
     type: object
   configs.SiteDto:
     properties:
+      address:
+        type: string
       name:
         type: string
       steps:
@@ -107,7 +109,7 @@ paths:
         type: string
       - description: Category name
         in: query
-        name: config
+        name: category
         type: string
       produces:
       - application/json
