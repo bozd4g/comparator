@@ -36,3 +36,15 @@ sites:
       - id: 2
         selector: ul.product-list li.search-item:nth-child(2) .product-price
         action: VALUE
+  - name: Trendyol
+    address: https://www.trendyol.com
+    steps:
+      - id: 0
+        selector: /sr?q=%s
+        action: SEARCH
+      - id: 1
+        selector: .prdct-cntnr-wrppr .p-card-wrppr:first-child a[href]
+        action: LINK
+      - id: 2
+        selector: .prdct-cntnr-wrppr .p-card-wrppr:first-child .prc-box-sllng
+        action: VALUE
