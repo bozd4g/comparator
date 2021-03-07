@@ -12,3 +12,15 @@ sites:
       - id: 2
         selector: .list-cell:first-child .price
         action: VALUE
+  - name: Kitapyurdu
+    address: https://www.kitapyurdu.com
+    steps:
+      - id: 0
+        selector: /index.php?route=product/search&filter_name=%s
+        action: SEARCH
+      - id: 1
+        selector: ul.product-grid li:first-child .pr-img-link
+        action: LINK
+      - id: 2
+        selector: ul.product-grid li:first-child .price .value
+        action: VALUE
