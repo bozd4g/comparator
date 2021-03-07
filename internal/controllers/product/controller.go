@@ -13,11 +13,11 @@ func New(service products.Service) Controller {
 func (c controller) Init(e *gin.Engine) {
 	group := e.Group("api/products")
 	{
-		group.GET(":name", c.getAllHandler)
+		group.GET(":name", c.getAllByNameHandler)
 	}
 }
 
-// GetAllProducts godoc
+// GetAllProductsByName godoc
 // @Summary Get all prices
 // @Description This method returns all prices
 // @Accept json
@@ -27,7 +27,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Param category query string false "Category name"
 // @Success 200 {object} []products.Dto "Success"
 // @Router /api/products/{name} [get]
-func (c controller) getAllHandler(g *gin.Context) {
+func (c controller) getAllByNameHandler(g *gin.Context) {
 	name := g.Param("name")
 	if name == "" {
 		g.JSON(http.StatusBadRequest, gin.H{"error": "Name cannot be empty!"})
