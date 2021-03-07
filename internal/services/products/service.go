@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"github.com/bozd4g/comparator/internal/services/configs"
 	"github.com/gocolly/colly/v2"
+	"net/url"
 	"sort"
 	"strings"
 )
@@ -51,16 +52,11 @@ func (s service) collectDataFromSite(name string, config configs.Dto) []Dto {
 			return site.Steps[i].Id > site.Steps[j].Id
 		})
 
-		s.collector.OnError(func(response *colly.Response, err error) {
-			fmt.Println(err)
-		})
-
 		for _, step := range site.Steps {
+			encodedName := url.QueryEscape(name)
+
 			if step.Action == configs.SEARCH {
-				err := s.collector.Visit(fmt.Sprintf("%s%s", site.Address, fmt.Sprintf(step.Selector, name)))
-				if err != nil {
-					fmt.Println(err)
-				}
+				_ = s.collector.Visit(fmt.Sprintf("%s%s", site.Address, fmt.Sprintf(step.Selector, encodedName)))
 			} else if step.Action == configs.LINK {
 				s.collector.OnHTML(step.Selector, func(e *colly.HTMLElement) {
 					href := e.Attr("href")
@@ -77,7 +73,9 @@ func (s service) collectDataFromSite(name string, config configs.Dto) []Dto {
 			}
 		}
 
-		dtos = append(dtos, dto)
+		if dto.Price != "" {
+			dtos = append(dtos, dto)
+		}
 	}
 
 	return dtos
