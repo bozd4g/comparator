@@ -20,8 +20,8 @@ definitions:
     type: object
   configs.StepDto:
     properties:
-      isValue:
-        type: boolean
+      action:
+        type: string
       selector:
         type: string
     type: object
@@ -104,6 +104,10 @@ paths:
         in: path
         name: name
         required: true
+        type: string
+      - description: Category name
+        in: query
+        name: config
         type: string
       produces:
       - application/json

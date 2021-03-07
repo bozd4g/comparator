@@ -134,6 +134,12 @@ var doc = `{
                         "name": "name",
                         "in": "path",
                         "required": true
+                    },
+                    {
+                        "type": "string",
+                        "description": "Category name",
+                        "name": "config",
+                        "in": "query"
                     }
                 ],
                 "responses": {
@@ -182,8 +188,8 @@ var doc = `{
         "configs.StepDto": {
             "type": "object",
             "properties": {
-                "isValue": {
-                    "type": "boolean"
+                "action": {
+                    "type": "string"
                 },
                 "selector": {
                     "type": "string"

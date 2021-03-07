@@ -24,6 +24,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Produce json
 // @tags Products
 // @Param name path string true "Product name"
+// @Param config query string false "Category name"
 // @Success 200 {object} []products.Dto "Success"
 // @Router /api/products/{name} [get]
 func (c controller) getAllHandler(g *gin.Context) {
@@ -33,5 +34,19 @@ func (c controller) getAllHandler(g *gin.Context) {
 		return
 	}
 
-	g.JSON(200, gin.H{"success": name})
+	var dtos []products.Dto
+	var err error
+	category := g.Query("category")
+	if category == "" {
+		dtos, err = c.service.GetAll(name)
+	} else {
+		dtos, err = c.service.GetAllByCategory(name, category)
+	}
+
+	if err != nil {
+		g.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	g.JSON(http.StatusOK, dtos)
 }
