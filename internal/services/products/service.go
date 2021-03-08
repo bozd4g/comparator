@@ -83,7 +83,6 @@ func (s service) collectDataFromSite(name string, config configs.Dto) []Dto {
 
 func (s service) clearCurrencies(price string) string {
 	currencies := []string{"TL", "TRY", "EUR", "USD"}
-	price = strings.Replace(price, ".", ",", 1)
 
 	for _, currency := range currencies {
 		price = strings.TrimLeft(price, currency)

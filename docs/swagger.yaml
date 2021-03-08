@@ -24,10 +24,19 @@ definitions:
     properties:
       action:
         type: string
+      id:
+        type: integer
       selector:
         type: string
     type: object
   products.Dto:
+    properties:
+      link:
+        type: string
+      name:
+        type: string
+      price:
+        type: string
     type: object
 host: localhost:5000
 info:
@@ -107,9 +116,11 @@ paths:
         name: name
         required: true
         type: string
-      - description: Category name
+      - description: Categories
+        enum:
+        - Books
         in: query
-        name: category
+        name: enumstring
         type: string
       produces:
       - application/json

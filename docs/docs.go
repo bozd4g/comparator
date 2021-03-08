@@ -136,9 +136,12 @@ var doc = `{
                         "required": true
                     },
                     {
+                        "enum": [
+                            "Books"
+                        ],
                         "type": "string",
-                        "description": "Category name",
-                        "name": "category",
+                        "description": "Categories",
+                        "name": "enumstring",
                         "in": "query"
                     }
                 ],
@@ -194,13 +197,27 @@ var doc = `{
                 "action": {
                     "type": "string"
                 },
+                "id": {
+                    "type": "integer"
+                },
                 "selector": {
                     "type": "string"
                 }
             }
         },
         "products.Dto": {
-            "type": "object"
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "string"
+                }
+            }
         }
     }
 }`

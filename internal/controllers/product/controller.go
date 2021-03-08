@@ -24,7 +24,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Produce json
 // @tags Products
 // @Param name path string true "Product name"
-// @Param category query string false "Category name"
+// @Param enumstring query string false "Categories" Enums(Books)
 // @Success 200 {object} []products.Dto "Success"
 // @Router /api/products/{name} [get]
 func (c controller) getAllByNameHandler(g *gin.Context) {
@@ -34,8 +34,9 @@ func (c controller) getAllByNameHandler(g *gin.Context) {
 		return
 	}
 
-	var dtos []products.Dto
 	var err error
+	var dtos []products.Dto
+
 	category := g.Query("category")
 	if category == "" {
 		dtos, err = c.service.GetAll(name)
