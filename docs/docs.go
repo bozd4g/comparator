@@ -141,7 +141,7 @@ var doc = `{
                         ],
                         "type": "string",
                         "description": "Categories",
-                        "name": "enumstring",
+                        "name": "category",
                         "in": "query"
                     }
                 ],

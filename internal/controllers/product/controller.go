@@ -24,7 +24,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Produce json
 // @tags Products
 // @Param name path string true "Product name"
-// @Param enumstring query string false "Categories" Enums(Books)
+// @Param category query string false "Categories" Enums(Books)
 // @Success 200 {object} []products.Dto "Success"
 // @Router /api/products/{name} [get]
 func (c controller) getAllByNameHandler(g *gin.Context) {

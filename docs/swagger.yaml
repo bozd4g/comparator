@@ -120,7 +120,7 @@ paths:
         enum:
         - Books
         in: query
-        name: enumstring
+        name: category
         type: string
       produces:
       - application/json
