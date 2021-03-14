@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/bozd4g/comparator/internal/services/configs"
 	"github.com/gocolly/colly/v2"
-	"net/http"
 	"net/url"
 	"sort"
 	"strconv"
