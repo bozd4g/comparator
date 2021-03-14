@@ -31,12 +31,29 @@ definitions:
     type: object
   products.Dto:
     properties:
-      link:
-        type: string
       name:
         type: string
-      price:
+      product:
+        $ref: '#/definitions/products.ProductDto'
+        type: object
+    type: object
+  products.MultipleDto:
+    properties:
+      name:
         type: string
+      products:
+        items:
+          $ref: '#/definitions/products.ProductDto'
+        type: array
+      total:
+        type: number
+    type: object
+  products.ProductDto:
+    properties:
+      link:
+        type: string
+      price:
+        type: number
     type: object
 host: localhost:5000
 info:
@@ -105,6 +122,39 @@ paths:
       summary: Get configs by name
       tags:
       - Configs
+  /api/products:
+    post:
+      consumes:
+      - application/json
+      description: This method returns all prices with their total price
+      parameters:
+      - description: Products
+        in: body
+        name: request
+        required: true
+        schema:
+          items:
+            type: string
+          type: array
+      - description: Category
+        enum:
+        - Books
+        in: query
+        name: category
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success
+          schema:
+            items:
+              $ref: '#/definitions/products.MultipleDto'
+            type: array
+      summary: Get all prices with their total
+      tags:
+      - Products
   /api/products/{name}:
     get:
       consumes:
@@ -116,7 +166,7 @@ paths:
         name: name
         required: true
         type: string
-      - description: Categories
+      - description: Category
         enum:
         - Books
         in: query

@@ -114,6 +114,56 @@ var doc = `{
                 }
             }
         },
+        "/api/products": {
+            "post": {
+                "description": "This method returns all prices with their total price",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "Products"
+                ],
+                "summary": "Get all prices with their total",
+                "parameters": [
+                    {
+                        "description": "Products",
+                        "name": "request",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    {
+                        "enum": [
+                            "Books"
+                        ],
+                        "type": "string",
+                        "description": "Category",
+                        "name": "category",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Success",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/products.MultipleDto"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/api/products/{name}": {
             "get": {
                 "description": "This method returns all prices",
@@ -140,7 +190,7 @@ var doc = `{
                             "Books"
                         ],
                         "type": "string",
-                        "description": "Categories",
+                        "description": "Category",
                         "name": "category",
                         "in": "query"
                     }
@@ -208,14 +258,40 @@ var doc = `{
         "products.Dto": {
             "type": "object",
             "properties": {
-                "link": {
-                    "type": "string"
-                },
                 "name": {
                     "type": "string"
                 },
-                "price": {
+                "product": {
+                    "type": "object",
+                    "$ref": "#/definitions/products.ProductDto"
+                }
+            }
+        },
+        "products.MultipleDto": {
+            "type": "object",
+            "properties": {
+                "name": {
                     "type": "string"
+                },
+                "products": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/products.ProductDto"
+                    }
+                },
+                "total": {
+                    "type": "number"
+                }
+            }
+        },
+        "products.ProductDto": {
+            "type": "object",
+            "properties": {
+                "link": {
+                    "type": "string"
+                },
+                "price": {
+                    "type": "number"
                 }
             }
         }

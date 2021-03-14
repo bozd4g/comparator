@@ -8,6 +8,7 @@ import (
 type Service interface {
 	GetAll(name string) ([]Dto, error)
 	GetAllByCategory(name, category string) ([]Dto, error)
+	GetAllMultipleByCategory(names []string, category string) ([]MultipleDto, error)
 }
 
 type service struct {
