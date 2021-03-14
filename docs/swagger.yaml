@@ -55,7 +55,6 @@ definitions:
       price:
         type: number
     type: object
-host: localhost:5000
 info:
   contact:
     email: me@furkanbozdag.com
