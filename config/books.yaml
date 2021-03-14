@@ -19,10 +19,10 @@ sites:
         selector: /index.php?route=product/search&filter_name=%s
         action: SEARCH
       - id: 1
-        selector: ul.product-grid li:first-child .pr-img-link
+        selector: div#product-table .product-cr:first-child .name a[href]
         action: LINK
       - id: 2
-        selector: ul.product-grid li:first-child .price .value
+        selector: div#product-table .product-cr:first-child .price-new  span.value
         action: VALUE
   - name: Hepsiburada
     address: https://www.hepsiburada.com
@@ -47,4 +47,16 @@ sites:
         action: LINK
       - id: 2
         selector: .prdct-cntnr-wrppr .p-card-wrppr:first-child .prc-box-sllng
+        action: VALUE
+  - name: Amazon
+    address: https://www.amazon.com.tr
+    steps:
+      - id: 0
+        selector: /s?k=%s
+        action: SEARCH
+      - id: 1
+        selector: .s-search-results .s-result-item:first-child a.a-link-normal[href]
+        action: LINK
+      - id: 2
+        selector: .s-search-results .s-result-item:first-child .a-price:first-child .a-offscreen
         action: VALUE
