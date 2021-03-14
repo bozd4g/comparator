@@ -82,7 +82,7 @@ paths:
             type: string
       summary: redirectToSwaggerUi
       tags:
-      - IndexController
+      - Index
   /api/configs:
     get:
       consumes:

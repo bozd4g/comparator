@@ -17,7 +17,7 @@ func (c controller) Init(e *gin.Engine) {
 // @Description This method redirects to swagger ui
 // @Accept json
 // @Produce json
-// @tags IndexController
+// @tags Index
 // @Success 308 {string} string	"Redirect"
 // @Router / [get]
 func (c controller) indexHandler(g *gin.Context) {

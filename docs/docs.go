@@ -43,7 +43,7 @@ var doc = `{
                     "application/json"
                 ],
                 "tags": [
-                    "IndexController"
+                    "Index"
                 ],
                 "summary": "redirectToSwaggerUi",
                 "responses": {
