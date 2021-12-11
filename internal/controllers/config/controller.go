@@ -1,20 +1,21 @@
 package config
 
 import (
+	"net/http"
+
 	"github.com/bozd4g/comparator/internal/services/configs"
 	"github.com/gin-gonic/gin"
-	"net/http"
 )
 
-func New(service configs.Service) Controller {
-	return controller{service: service}
+func New(service configs.Servicer) Controller {
+	return Controller{service: service}
 }
 
-func (c controller) Init(e *gin.Engine) {
+func (c Controller) Init(e *gin.Engine) {
 	group := e.Group("api/configs")
 	{
-		group.GET("", c.getAllHandler)
-		group.GET(":name", c.getByNameHandler)
+		group.GET("", c.GetAllHandler)
+		group.GET(":name", c.GetByNameHandler)
 	}
 }
 
@@ -26,7 +27,7 @@ func (c controller) Init(e *gin.Engine) {
 // @tags Configs
 // @Success 200 {object} []configs.Dto "Success"
 // @Router /api/configs [get]
-func (c controller) getAllHandler(g *gin.Context) {
+func (c Controller) GetAllHandler(g *gin.Context) {
 	dtos, err := c.service.GetAll()
 	if err != nil {
 		g.JSON(http.StatusInternalServerError, gin.H{"error": "An error occured while retrieving the confings! Please try again later."})
@@ -42,10 +43,10 @@ func (c controller) getAllHandler(g *gin.Context) {
 // @Accept json
 // @Produce json
 // @tags Configs
-// @Param name path string true "Config name"
+// @Param name path string true "Config" Enums(Books)
 // @Success 200 {object} configs.Dto "Success"
 // @Router /api/configs/{name} [get]
-func (c controller) getByNameHandler(g *gin.Context) {
+func (c Controller) GetByNameHandler(g *gin.Context) {
 	name := g.Param("name")
 	if name == "" {
 		g.JSON(http.StatusBadRequest, gin.H{"error": "Name cannot be empty!"})

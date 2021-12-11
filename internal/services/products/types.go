@@ -5,15 +5,13 @@ import (
 	"github.com/gocolly/colly/v2"
 )
 
-type Service interface {
+type Servicer interface {
 	GetAll(name string) ([]Dto, error)
-	GetAllByCategory(name, category string) ([]Dto, error)
-	GetAllMultipleByCategory(names []string, category string) ([]MultipleDto, error)
+	GetAllByConfig(name, config string) ([]Dto, error)
+	GetAllMultipleByConfig(names []string, config string) ([]MultipleDto, error)
 }
 
-type service struct {
+type Service struct {
 	collector     *colly.Collector
-	configService configs.Service
+	configService configs.Servicer
 }
-
-const SAMPLE_USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 11_1_0) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/537.36 Safari/537.36"

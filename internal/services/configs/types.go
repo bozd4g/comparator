@@ -1,10 +1,10 @@
 package configs
 
-type Service interface {
+type Servicer interface {
 	GetAll() ([]Dto, error)
 	GetByName(name string) (*Dto, error)
 }
 
-type service struct {
+type Service struct {
 	configsPath string
 }

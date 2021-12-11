@@ -81,8 +81,11 @@
                 "summary": "Get configs by name",
                 "parameters": [
                     {
+                        "enum": [
+                            "Books"
+                        ],
                         "type": "string",
-                        "description": "Config name",
+                        "description": "Config",
                         "name": "name",
                         "in": "path",
                         "required": true
@@ -129,8 +132,8 @@
                             "Books"
                         ],
                         "type": "string",
-                        "description": "Category",
-                        "name": "category",
+                        "description": "Config",
+                        "name": "config",
                         "in": "query",
                         "required": true
                     }
@@ -174,9 +177,10 @@
                             "Books"
                         ],
                         "type": "string",
-                        "description": "Category",
-                        "name": "category",
-                        "in": "query"
+                        "description": "Config",
+                        "name": "config",
+                        "in": "query",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -246,7 +250,6 @@
                     "type": "string"
                 },
                 "product": {
-                    "type": "object",
                     "$ref": "#/definitions/products.ProductDto"
                 }
             }

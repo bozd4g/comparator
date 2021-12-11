@@ -1,16 +1,17 @@
 package index
 
 import (
-	"github.com/gin-gonic/gin"
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 func New() Controller {
-	return &controller{}
+	return Controller{}
 }
 
-func (c controller) Init(e *gin.Engine) {
-	e.GET("/", c.indexHandler)
+func (c Controller) Init(e *gin.Engine) {
+	e.GET("/", c.IndexHandler)
 }
 
 // @Summary redirectToSwaggerUi
@@ -20,6 +21,6 @@ func (c controller) Init(e *gin.Engine) {
 // @tags Index
 // @Success 308 {string} string	"Redirect"
 // @Router / [get]
-func (c controller) indexHandler(g *gin.Context) {
+func (c Controller) IndexHandler(g *gin.Context) {
 	g.Redirect(http.StatusPermanentRedirect, "/swagger/index.html")
 }

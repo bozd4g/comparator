@@ -3,10 +3,11 @@ package configs
 import (
 	"errors"
 	"fmt"
-	"gopkg.in/yaml.v2"
 	"io/ioutil"
 	"os"
 	"path"
+
+	"gopkg.in/yaml.v2"
 )
 
 func New() Service {
@@ -15,12 +16,12 @@ func New() Service {
 		panic(err)
 	}
 
-	return service{
+	return Service{
 		configsPath: path.Join(dirname, "config"),
 	}
 }
 
-func (s service) GetAll() ([]Dto, error) {
+func (s Service) GetAll() ([]Dto, error) {
 	files, err := ioutil.ReadDir(s.configsPath)
 	if err != nil {
 		return nil, err
@@ -44,7 +45,7 @@ func (s service) GetAll() ([]Dto, error) {
 	return models, nil
 }
 
-func (s service) GetByName(name string) (*Dto, error) {
+func (s Service) GetByName(name string) (*Dto, error) {
 	models, err := s.GetAll()
 	if err != nil {
 		return nil, err

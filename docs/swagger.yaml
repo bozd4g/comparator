@@ -35,7 +35,6 @@ definitions:
         type: string
       product:
         $ref: '#/definitions/products.ProductDto'
-        type: object
     type: object
   products.MultipleDto:
     properties:
@@ -106,7 +105,9 @@ paths:
       - application/json
       description: This method returns spesific config
       parameters:
-      - description: Config name
+      - description: Config
+        enum:
+        - Books
         in: path
         name: name
         required: true
@@ -135,11 +136,11 @@ paths:
           items:
             type: string
           type: array
-      - description: Category
+      - description: Config
         enum:
         - Books
         in: query
-        name: category
+        name: config
         required: true
         type: string
       produces:
@@ -165,11 +166,12 @@ paths:
         name: name
         required: true
         type: string
-      - description: Category
+      - description: Config
         enum:
         - Books
         in: query
-        name: category
+        name: config
+        required: true
         type: string
       produces:
       - application/json
