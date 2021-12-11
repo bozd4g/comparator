@@ -4,9 +4,8 @@ go 1.16
 
 require (
 	github.com/PuerkitoBio/goquery v1.8.0
-	github.com/gin-gonic/gin v1.6.3
+	github.com/gin-gonic/gin v1.7.0
 	github.com/go-openapi/spec v0.20.3 // indirect
-	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/leodido/go-urn v1.2.1 // indirect
