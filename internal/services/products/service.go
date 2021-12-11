@@ -3,18 +3,18 @@ package products
 import (
 	"errors"
 	"fmt"
+	"log"
+	"net/http"
 	"net/url"
-	"sort"
 	"strconv"
 	"strings"
 
+	"github.com/PuerkitoBio/goquery"
 	"github.com/bozd4g/comparator/internal/services/configs"
-	"github.com/gocolly/colly/v2"
 )
 
 func New(configService configs.Servicer) Service {
 	return Service{
-		collector:     colly.NewCollector(colly.AllowURLRevisit(), colly.UserAgent(SAMPLE_USER_AGENT)),
 		configService: configService,
 	}
 }
@@ -99,36 +99,37 @@ func (s Service) GetAllMultipleByConfig(names []string, config string) ([]Multip
 
 func (s Service) collectDataFromSite(name string, config configs.Dto) map[string][]ProductDto {
 	var dtos = make(map[string][]ProductDto)
+	encodedName := url.QueryEscape(name)
 
 	for _, site := range config.Sites {
-		sort.Slice(site.Steps, func(i, j int) bool {
-			return site.Steps[i].Id > site.Steps[j].Id
-		})
+		url := fmt.Sprintf("%s%s", site.Address, fmt.Sprintf(site.Search, encodedName))
+		res, err := http.Get(url)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		defer res.Body.Close()
+		if res.StatusCode != 200 {
+			fmt.Println(fmt.Sprintf("Unexpected status code(%d) for %s from %s", res.StatusCode, name, url))
+			continue
+		}
+
+		doc, err := goquery.NewDocumentFromReader(res.Body)
+		if err != nil {
+			fmt.Println(fmt.Sprintf("An error occured while reading the body of response! Site: %s, Error: %+v", url, err))
+			continue
+		}
 
 		var dto ProductDto
-		for _, step := range site.Steps {
-			encodedName := url.PathEscape(name)
 
-			if step.Action == configs.SEARCH {
-				site := fmt.Sprintf("%s%s", site.Address, fmt.Sprintf(step.Selector, encodedName))
-				err := s.collector.Visit(site)
-				if err != nil {
-					break
-				}
-			} else if step.Action == configs.LINK {
-				s.collector.OnHTML(step.Selector, func(e *colly.HTMLElement) {
-					href := e.Attr("href")
-					if strings.Contains(href, site.Address) {
-						dto.Link = href
-					} else {
-						dto.Link = fmt.Sprintf("%s%s", site.Address, href)
-					}
-				})
-			} else if step.Action == configs.VALUE {
-				s.collector.OnHTML(step.Selector, func(e *colly.HTMLElement) {
-					dto.Price = s.clearCurrencies(e.Text)
-				})
-			}
+		link := doc.Find(site.Link)
+		if len(link.Nodes) != 0 {
+			dto.Link = link.First().AttrOr("href", "")
+		}
+
+		value := doc.Find(site.Value)
+		if len(value.Nodes) != 0 {
+			dto.Price = s.clearCurrencies(value.First().Text())
 		}
 
 		if dto.Price != 0 {

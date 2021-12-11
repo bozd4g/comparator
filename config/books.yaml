@@ -2,61 +2,30 @@ name: Books
 sites:
   - name: D&R
     address: https://www.dr.com.tr
-    steps:
-      - id: 0
-        selector: /search?q=%s
-        action: SEARCH
-      - id: 1
-        selector: .list-cell:first-child .item-name
-        action: LINK
-      - id: 2
-        selector: .list-cell:first-child .price
-        action: VALUE
+    search: /search?q=%s
+    link: .list-cell:first-child .item-name
+    value: .list-cell:first-child .price
+
   - name: Kitapyurdu
     address: https://www.kitapyurdu.com
-    steps:
-      - id: 0
-        selector: /index.php?route=product/search&filter_name=%s
-        action: SEARCH
-      - id: 1
-        selector: div#product-table .product-cr:first-child .name a[href]
-        action: LINK
-      - id: 2
-        selector: div#product-table .product-cr:first-child .price-new  span.value
-        action: VALUE
+    search: /index.php?route=product/search&filter_name=%s
+    link: div#product-table .product-cr:first-child .name a[href]
+    value: div#product-table .product-cr:first-child .price-new  span.value
+
   - name: Hepsiburada
     address: https://www.hepsiburada.com
-    steps:
-      - id: 0
-        selector: /ara?q=%s
-        action: SEARCH
-      - id: 1
-        selector: ul.product-list li.search-item:nth-child(2) a[href]
-        action: LINK
-      - id: 2
-        selector: ul.product-list li.search-item:nth-child(2) .product-price
-        action: VALUE
+    search: /ara?q=%s
+    link: ul.product-list li.search-item:nth-child(2) a[href]
+    value: ul.product-list li.search-item:nth-child(2) .product-price
+
   - name: Trendyol
     address: https://www.trendyol.com
-    steps:
-      - id: 0
-        selector: /sr?q=%s
-        action: SEARCH
-      - id: 1
-        selector: .prdct-cntnr-wrppr .p-card-wrppr:first-child a[href]
-        action: LINK
-      - id: 2
-        selector: .prdct-cntnr-wrppr .p-card-wrppr:first-child .prc-box-sllng
-        action: VALUE
+    search: /sr?q=%s
+    link: .prdct-cntnr-wrppr .p-card-wrppr:first-child a[href]
+    value: .prdct-cntnr-wrppr .p-card-wrppr:first-child .prc-box-sllng
+
   - name: Amazon
     address: https://www.amazon.com.tr
-    steps:
-      - id: 0
-        selector: /s?k=%s
-        action: SEARCH
-      - id: 1
-        selector: .s-search-results .s-result-item:first-child a.a-link-normal[href]
-        action: LINK
-      - id: 2
-        selector: .s-search-results .s-result-item:first-child .a-price:first-child .a-offscreen
-        action: VALUE
+    search: /s?k=%s
+    link: .s-search-results .s-result-item:first-child a.a-link-normal[href]
+    value: .s-search-results .s-result-item:first-child .a-price:first-child .a-offscreen

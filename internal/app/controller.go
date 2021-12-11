@@ -1,12 +1,13 @@
 package app
 
 import (
+	"net/http"
+
 	"github.com/bozd4g/comparator/internal/controllers/config"
 	"github.com/bozd4g/comparator/internal/controllers/index"
 	"github.com/bozd4g/comparator/internal/controllers/product"
-	"github.com/bozd4g/comparator/internal/services/products"
 	"github.com/bozd4g/comparator/internal/services/configs"
-	"net/http"
+	"github.com/bozd4g/comparator/internal/services/products"
 
 	_ "github.com/bozd4g/comparator/docs"
 	"github.com/gin-gonic/gin"

@@ -2,7 +2,6 @@ package products
 
 import (
 	"github.com/bozd4g/comparator/internal/services/configs"
-	"github.com/gocolly/colly/v2"
 )
 
 type Servicer interface {
@@ -12,6 +11,5 @@ type Servicer interface {
 }
 
 type Service struct {
-	collector     *colly.Collector
 	configService configs.Servicer
 }
