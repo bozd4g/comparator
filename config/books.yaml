@@ -3,8 +3,8 @@ sites:
   - name: D&R
     address: https://www.dr.com.tr
     search: /search?q=%s
-    link: .list-cell:first-child .item-name
-    value: .list-cell:first-child .price
+    link: a.prd-name
+    value: .prd:first-child div.prd-price
 
   - name: Kitapyurdu
     address: https://www.kitapyurdu.com
@@ -15,8 +15,8 @@ sites:
   - name: Hepsiburada
     address: https://www.hepsiburada.com
     search: /ara?q=%s
-    link: ul.product-list li.search-item:nth-child(2) a[href]
-    value: ul.product-list li.search-item:nth-child(2) .product-price
+    link: .productListContent-item:first-child div[data-test-id=product-card-container] a[href]
+    value: .productListContent-item:first-child div[data-test-id=price-current-price]
 
   - name: Trendyol
     address: https://www.trendyol.com
@@ -27,5 +27,5 @@ sites:
   - name: Amazon
     address: https://www.amazon.com.tr
     search: /s?k=%s
-    link: .s-search-results .s-result-item:first-child a.a-link-normal[href]
-    value: .s-search-results .s-result-item:first-child .a-price:first-child .a-offscreen
+    link: .s-search-results .sg-col-inner a.a-link-normal[href]
+    value: .s-search-results .sg-col-inner span.a-offscreen

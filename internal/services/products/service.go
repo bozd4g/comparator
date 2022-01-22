@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"strconv"
 	"strings"
+	"sync"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/bozd4g/comparator/internal/services/configs"
@@ -15,6 +16,7 @@ import (
 
 func New(configService configs.Servicer) Service {
 	return Service{
+		mux:           &sync.Mutex{},
 		configService: configService,
 	}
 }
@@ -103,7 +105,14 @@ func (s Service) collectDataFromSite(name string, config configs.Dto) map[string
 
 	for _, site := range config.Sites {
 		url := fmt.Sprintf("%s%s", site.Address, fmt.Sprintf(site.Search, encodedName))
-		res, err := http.Get(url)
+
+		request, err := http.NewRequest(http.MethodGet, url, nil)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		request.Header.Set("User-Agent", "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.108 Safari/537.36")
+		res, err := http.DefaultClient.Do(request)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -125,6 +134,9 @@ func (s Service) collectDataFromSite(name string, config configs.Dto) map[string
 		link := doc.Find(site.Link)
 		if len(link.Nodes) != 0 {
 			dto.Link = link.First().AttrOr("href", "")
+			if !strings.Contains(dto.Link, site.Address) {
+				dto.Link = fmt.Sprintf("%s%s", site.Address, dto.Link)
+			}
 		}
 
 		value := doc.Find(site.Value)
@@ -132,9 +144,9 @@ func (s Service) collectDataFromSite(name string, config configs.Dto) map[string
 			dto.Price = s.clearCurrencies(value.First().Text())
 		}
 
-		if dto.Price != 0 {
-			dtos[site.Name] = append(dtos[site.Name], dto)
-		}
+		s.mux.Lock()
+		dtos[site.Name] = append(dtos[site.Name], dto)
+		s.mux.Unlock()
 	}
 
 	return dtos
@@ -144,9 +156,9 @@ func (s Service) clearCurrencies(price string) float64 {
 	currencies := []string{"TL", "TRY", "EUR", "USD"}
 
 	for _, currency := range currencies {
+		price = strings.TrimSpace(price)
 		price = strings.TrimLeft(price, currency)
 		price = strings.TrimRight(price, currency)
-		price = strings.TrimSpace(price)
 	}
 
 	if !strings.Contains(price, ".") {
@@ -155,6 +167,7 @@ func (s Service) clearCurrencies(price string) float64 {
 
 	priceAsFloat, err := strconv.ParseFloat(strings.TrimSpace(price), 64)
 	if err != nil {
+		fmt.Println(fmt.Sprintf("An error occured while parsing the price! Price: %s, Error: %+v", price, err))
 		return 0
 	}
 

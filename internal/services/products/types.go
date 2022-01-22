@@ -1,6 +1,8 @@
 package products
 
 import (
+	"sync"
+
 	"github.com/bozd4g/comparator/internal/services/configs"
 )
 
@@ -11,5 +13,6 @@ type Servicer interface {
 }
 
 type Service struct {
+	mux           *sync.Mutex
 	configService configs.Servicer
 }
